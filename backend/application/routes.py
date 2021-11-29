@@ -17,10 +17,10 @@ def create_author():
 
 def create_book():
     package = request.json
-    new_task = Tasks(description=package["description"])
-    db.session.add(new_task)
+    new_book = Book(name=package["name"])
+    db.session.add(new_book)
     db.session.commit()
-    return Response(f"Added task with description: {new_task.description}", mimetype='text/plain')
+    return Response(f"The book: {new_book.name}, has been added to the database", mimetype='text/plain')
     
 @app.route('/create/review', methods=['POST'])
 
