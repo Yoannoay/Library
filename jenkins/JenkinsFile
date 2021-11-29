@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    environment {
+        DOCKER_HUB_CREDS = credentials("DOCKER_HUB_CREDS")
+        DATABASE_URI=credentials("DATABASE_URI")
+        
+    }
+    stages {
+        stage('Set Up') {
+            steps {
+                sh "bash jenkins/setup.sh"
+            }
+        }
+        stage('Build') {
+            steps {
+               sh "bash jenkins/build.sh"
+            }
+        }
+        stage('Push') {
+            steps {
+                sh "bash jenkins/push.sh"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "bash jenkins/test.sh"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "bash jenkins/deploy.sh"
+            }
+        }
+    }
+}
