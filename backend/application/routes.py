@@ -11,7 +11,7 @@ def create_author():
     new_author = Author(name=package["name"])
     db.session.add(new_author)
     db.session.commit()
-    return Response(f"The author: {new_author.description}, has been added to the database", mimetype='text/plain')
+    return Response(f"The author: {new_author.name}, has been added to the database", mimetype='text/plain')
 
 @app.route('/create/book', methods=['POST'])
 
