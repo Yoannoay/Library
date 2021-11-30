@@ -32,19 +32,21 @@ def create_review():
     return Response("Thank you for adding your review and rating to the database", mimetype='text/plain')
 
 
-# @app.route('/read/allTasks', methods=['GET'])
-# def read_tasks():
-#     all_tasks = Tasks.query.all()
-#     tasks_dict = {"tasks": []}
-#     for task in all_tasks:
-#         tasks_dict["tasks"].append(
-#             {
-#                 "id": "task.id"
-#                 "description": task.description,
-#                 "completed": task.completed
-#             }
-#         )
-#     return jsonify(tasks_dict)
+@app.route('/allreviews', methods=['GET'])
+def read_allreviews():
+    all_reviews = Review.query.all()
+    review_dict = {"all reviews": []}
+    for review in all_reviews:
+        review_dict["all reviews"].append(
+            {
+                "Book": review.book_id.name,
+                "Author": review.author_id.name,
+                "Rating": review.rating,
+                "Review": review.review
+
+            }
+        )
+    return jsonify(review_dict)
 
 # @app.route('/update/task/<int:id>', methods=['PUT'])
 # def update_task(id):

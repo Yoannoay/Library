@@ -11,6 +11,9 @@ services:
     build: ./backend
     image: ${DOCKER_HUB_CREDS_USR}/library-backend:latest
     container_name: library-backend
+    ports:
+    - target: 5000
+      published: 5000
     environment:
       DATABASE_URI:
       CREATE_SCHEMA:
