@@ -25,13 +25,7 @@ def create_book():
     db.session.commit()
     return Response(f"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database", mimetype='text/plain')
 
-    #     package= request.json
-    # task = Tasks.query.get(id)
-
-
-    # task.description = package["description"]
-    # db.session.commit()
-    # return Response(f"Updated task (ID: {id}): {task.description}", mimetype='text/plain')
+    
     
 @app.route('/create/review', methods=['POST'])
 
@@ -54,7 +48,7 @@ def all_authors():
         authors["author_list"].append(
             {
                 "Author": writer.name,
-                "Books": writer.author.books.name
+                "Books": writer.books.name
             }
         )
     # if author.id 
