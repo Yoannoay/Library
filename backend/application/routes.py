@@ -32,6 +32,19 @@ def create_review():
     db.session.commit()
     return Response("Thank you for adding your review and rating to the database", mimetype='text/plain')
 
+@app.route('/allauthors', methods=['GET'])
+def all_authors():
+    author_list = Author.query.all()
+    authors = {"author_list": []}
+    for author in author_list:
+        authors["author_list"].append(
+            {
+                "Author": Author.name
+            }
+        )
+    return jsonify(authors)
+
+
 
 @app.route('/allreviews', methods=['GET'])
 def read_allreviews():
