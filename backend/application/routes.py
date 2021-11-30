@@ -51,8 +51,7 @@ def all_authors():
     author_list = Author.query.all()
     authors = {"author_list": []}
     for author in author_list:
-
-        book = author.books
+        
         
         authors["author_list"].append(
             {
@@ -60,6 +59,9 @@ def all_authors():
                 "Books": book
             }
         )
+    if author.id 
+    books = []
+        book = author.books
     return jsonify(authors)
 
 
