@@ -52,19 +52,18 @@ def all_authors():
     authors = {"author_list": []}
     for author in author_list:
         books = []
-        data = Books.query.filter_by(id=author[1]).all())
-        books["has written"].append(data)
+        # data = Books.query.filter_by(id=author[1]).all())
+        # books["has written"].append(data)
         authors["author_list"].append(
             {
                 "Author": author.name,
-                "Books": data
-                # "Books": author.books.name[0]
+                "Books": author.books.name.all()
             }
         )
     # if author.id 
     # books = []
     #     book = author.books
-    # return jsonify(authors)
+    return jsonify(authors)
 
 
 @app.route('/allbooks', methods=['GET'])
