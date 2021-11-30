@@ -25,13 +25,13 @@ def create_book(id):
     db.session.commit()
     return Response(f"The book: {new_book.name}, has been added to the database", mimetype='text/plain')
 
-        package= request.json
-    task = Tasks.query.get(id)
+    #     package= request.json
+    # task = Tasks.query.get(id)
 
 
-    task.description = package["description"]
-    db.session.commit()
-    return Response(f"Updated task (ID: {id}): {task.description}", mimetype='text/plain')
+    # task.description = package["description"]
+    # db.session.commit()
+    # return Response(f"Updated task (ID: {id}): {task.description}", mimetype='text/plain')
     
 @app.route('/create/review/<int:authorid>/<int:bookid>', methods=['POST'])
 
