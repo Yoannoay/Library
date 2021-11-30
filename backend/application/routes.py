@@ -23,10 +23,12 @@ def create_book():
     db.session.commit()
     return Response(f"The book: {new_book.name}, has been added to the database", mimetype='text/plain')
     
-@app.route('/create/review', methods=['POST'])
+@app.route('/create/review/<int:authorid>/<int:bookid>', methods=['POST'])
 
-def create_review():
+def create_review(authorid, bookid):
     package = request.json
+    writer = Author.query author 
+    book getter 
     new_review = Review(rating=package["rating"], thoughts=package["thoughts"], author_id=package["author_id"], book_id=package["book_id"])
     db.session.add(new_review)
     db.session.commit()
@@ -52,10 +54,11 @@ def all_books():
     for book in book_list:
         book["book_list"].append(
             {
-                "Book": book.name
+                "Book": book.name,
+                "author": book.author.name 
             }
         )
-    return jsonify(authors)
+    return jsonify(books)
 
 
 
