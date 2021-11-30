@@ -4,6 +4,7 @@ from flask import render_template, Response, request, redirect, url_for, jsonify
 from os import getenv
 
 
+
 @app.route('/create/author', methods=['POST'])
 
 def create_author():
@@ -39,8 +40,8 @@ def read_allreviews():
     for review in all_reviews:
         review_dict["all reviews"].append(
             {
-                "Book": review.book_id.name,
-                "Author": review.author_id.name,
+                "Book": review.book.name,
+                "Author": review.author.name,
                 "Rating": review.rating,
                 "Review": review.review
 
