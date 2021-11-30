@@ -45,6 +45,19 @@ def all_authors():
     return jsonify(authors)
 
 
+@app.route('/allbooks', methods=['GET'])
+def all_books():
+    book_list = Book.query.all()
+    books = {"book_list": []}
+    for book in book_list:
+        book["book_list"].append(
+            {
+                "Book": book.name
+            }
+        )
+    return jsonify(authors)
+
+
 
 @app.route('/allreviews', methods=['GET'])
 def read_allreviews():
