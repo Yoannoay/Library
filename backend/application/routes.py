@@ -52,7 +52,7 @@ def all_authors():
     authors = {"author_list": []}
     for author in author_list:
 
-        book = author.books.all()
+        book = author.books
         
         authors["author_list"].append(
             {
