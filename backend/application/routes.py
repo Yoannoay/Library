@@ -17,11 +17,10 @@ def create_author():
 
 @app.route('/create/book', methods=['POST'])
 
-def create_book(id):
+def create_book():
     package = request.json
-    author = Author.query.get(id)
 
-    new_book = Book(name=package["name"], author_id=package["author_id"])
+    new_book = Book(name=package["name"], author=package["author"])
     db.session.add(new_book)
     db.session.commit()
     return Response(f"The book: {new_book.name}, has been added to the database", mimetype='text/plain')
