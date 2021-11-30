@@ -71,17 +71,11 @@ def all_books():
     for book in book_list:
         books["book_list"].append(
             {
-                "Book": book.name  
+                "Book": book.name,
+                "author": book.author.name,
+                "author id": book.author.id 
             }
-        )
-        if book.author.name == True:
-            for book in book_list:
-                books["book_list"].append(
-                    {
-                        "author": book.author.name,
-                        "author id": book.author.id
-                    }
-                )
+      
     return jsonify(books)
 
 
