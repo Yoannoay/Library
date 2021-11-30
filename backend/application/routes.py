@@ -48,14 +48,14 @@ def all_authors():
 
     author_list = Author.query.all()
     authors = {"author_list": []}
-    for author in author_list:
+    for write in author_list:
         books = []
         # data = Books.query.filter_by(id=author[1]).all())
         # books["has written"].append(data)
         authors["author_list"].append(
             {
-                "Author": author.name
-                # "Books": author.books.name.all()
+                "Author": writer.name,
+                "Books": writer.author.books.name
             }
         )
     # if author.id 
