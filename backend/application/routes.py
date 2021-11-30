@@ -75,6 +75,7 @@ def all_books():
                 "author": book.author.name,
                 "author id": book.author.id 
             }
+        )
       
     return jsonify(books)
 
