@@ -51,9 +51,7 @@ def all_authors():
                 "Books": writer.books.name
             }
         )
-    # if author.id 
-    # books = []
-    #     book = author.books
+    
     return jsonify(authors)
 
 
