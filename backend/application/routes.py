@@ -27,8 +27,8 @@ def create_book():
 
 def create_review(authorid, bookid):
     package = request.json
-    writer = Author.query author 
-    book getter 
+    # writer = Author.query author 
+    # book getter 
     new_review = Review(rating=package["rating"], thoughts=package["thoughts"], author_id=package["author_id"], book_id=package["book_id"])
     db.session.add(new_review)
     db.session.commit()
