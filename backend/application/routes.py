@@ -14,14 +14,24 @@ def create_author():
     db.session.commit()
     return Response(f"The author: {new_author.name}, has been added to the database", mimetype='text/plain')
 
-@app.route('/create/book', methods=['POST'])
+@app.route('/<int:id>/create/book', methods=['POST'])
 
-def create_book():
+def create_book(id):
     package = request.json
+    author = Author.query.get(id)
+
     new_book = Book(name=package["name"], author_id=package["author_id"])
     db.session.add(new_book)
     db.session.commit()
     return Response(f"The book: {new_book.name}, has been added to the database", mimetype='text/plain')
+
+        package= request.json
+    task = Tasks.query.get(id)
+
+
+    task.description = package["description"]
+    db.session.commit()
+    return Response(f"Updated task (ID: {id}): {task.description}", mimetype='text/plain')
     
 @app.route('/create/review/<int:authorid>/<int:bookid>', methods=['POST'])
 
@@ -52,7 +62,7 @@ def all_books():
     book_list = Book.query.all()
     books = {"book_list": []}
     for book in book_list:
-        book["book_list"].append(
+        books["book_list"].append(
             {
                 "Book": book.name,
                 "author": book.author.name 
