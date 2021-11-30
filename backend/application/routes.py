@@ -43,7 +43,7 @@ def read_allreviews():
                 "Book": review.book.name,
                 "Author": review.author.name,
                 "Rating": review.rating,
-                "Review": review.review
+                "Review": review.thoughts
 
             }
         )
