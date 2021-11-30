@@ -27,7 +27,7 @@ def create_book():
 
 def create_review():
     package = request.json
-    new_review = Review(rating=package["rating"], reviews=package["reviews"])
+    new_review = Review(rating=package["rating"], thoughts=package["thoughts"])
     db.session.add(new_review)
     db.session.commit()
     return Response("Thank you for adding your review and rating to the database", mimetype='text/plain')
