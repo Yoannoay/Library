@@ -57,7 +57,7 @@ def all_authors():
         authors["author_list"].append(
             {
                 "Author": author.name,
-                "Books": 
+                "Books": book
             }
         )
     return jsonify(authors)
