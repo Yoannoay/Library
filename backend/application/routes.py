@@ -2,6 +2,7 @@ from application import app, db
 from application.models import Author, Book, Review
 from flask import render_template, Response, request, redirect, url_for, jsonify
 from os import getenv
+import json
 
 
 
@@ -55,7 +56,7 @@ def all_authors():
                 "Author": author.name,
                 "Books": author.books
             }
-        ).toJSON
+        ).toJSON()
     return jsonify(authors)
 
 
