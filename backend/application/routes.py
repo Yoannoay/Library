@@ -56,7 +56,7 @@ def all_authors():
                 "Author": author.name,
                 "Books": author.books
             }
-        ).toJSON()
+        )
     return jsonify(authors)
 
 
