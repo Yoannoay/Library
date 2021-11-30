@@ -26,10 +26,10 @@ def create_book():
 
 def create_review():
     package = request.json
-    new_review = Review(description=package["description"])
-    db.session.add(new_task)
+    new_review = Review(rating=package["rating"], review=package["review"])
+    db.session.add(new_review)
     db.session.commit()
-    return Response(f"Added task with description: {new_task.description}", mimetype='text/plain')
+    return Response("Thank you for adding your review and rating to the database", mimetype='text/plain')
 
 
 # @app.route('/read/allTasks', methods=['GET'])
