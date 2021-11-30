@@ -56,13 +56,13 @@ def all_authors():
         authors["author_list"].append(
             {
                 "Author": author.name,
-                "Books": book
+                "Books": author.book.name[0]
             }
         )
-    if author.id 
-    books = []
-        book = author.books
-    return jsonify(authors)
+    # if author.id 
+    # books = []
+    #     book = author.books
+    # return jsonify(authors)
 
 
 @app.route('/allbooks', methods=['GET'])
