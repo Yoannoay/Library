@@ -23,7 +23,7 @@ def create_book():
     new_book = Book(name=package["name"], author_id=package["author_id"])
     db.session.add(new_book)
     db.session.commit()
-    return Response(f"The book: {new_book.name}, has been added to the database", mimetype='text/plain')
+    return Response(f"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database", mimetype='text/plain')
 
     #     package= request.json
     # task = Tasks.query.get(id)
@@ -55,7 +55,7 @@ def all_authors():
         authors["author_list"].append(
             {
                 "Author": author.name,
-                "Books": author.books.id.name.all()
+                "Books": author.books.name.all()
             }
         )
     # if author.id 
