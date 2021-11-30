@@ -56,7 +56,7 @@ def all_authors():
         authors["author_list"].append(
             {
                 "Author": author.name,
-                "Books": author.book.name[0]
+                "Books": author.books.name[0]
             }
         )
     # if author.id 
