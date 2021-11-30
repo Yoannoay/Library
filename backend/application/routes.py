@@ -54,7 +54,7 @@ def all_authors():
         authors["author_list"].append(
             {
                 "Author": author.name,
-                "Books": author.books
+                "Books": author.books.query.order_by(Books.name).all()
             }
         )
     return jsonify(authors)
