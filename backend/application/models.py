@@ -9,8 +9,8 @@ class Author(db.Model):
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False)
-    thoughts =db.relationship('Review', backref='book')
-    reviews = db.Column(db.Integer, db.ForeignKey('author.id'), nullable=True)
+    reviews =db.relationship('Review', backref='book')
+    author_id = db.Column(db.Integer, db.ForeignKey('author.id'), nullable=True)
     
 
 class Review(db.Model):
