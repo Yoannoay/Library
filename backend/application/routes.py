@@ -53,9 +53,9 @@ def all_authors():
         authors["author_list"].append(
             {
                 "Author": author.name,
-                "Books": author.books.name
+                "Books": author.books
             }
-        )
+        ).toJSON
     return jsonify(authors)
 
 
