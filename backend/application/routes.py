@@ -34,12 +34,11 @@ def create_book(id):
     # db.session.commit()
     # return Response(f"Updated task (ID: {id}): {task.description}", mimetype='text/plain')
     
-@app.route('/create/review/<int:authorid>/<int:bookid>', methods=['POST'])
+@app.route('/create/review', methods=['POST'])
 
-def create_review(authorid, bookid):
+def create_review():
     package = request.json
-    # writer = Author.query author 
-    # book getter 
+
     new_review = Review(rating=package["rating"], thoughts=package["thoughts"], author=package["author"], book=package["book"])
     db.session.add(new_review)
     db.session.commit()
