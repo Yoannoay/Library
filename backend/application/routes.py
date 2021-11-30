@@ -72,14 +72,21 @@ def all_books():
     for book in book_list:
         books["book_list"].append(
             {
-                "Book": book.name,
-                "author": book.author.name,
-                "author id": book.author.id
+                "Book": book.name  
             }
         )
+        if book.author.name == True:
+            for book in book_list:
+                books["book_list"].append(
+                    {
+                        "author": book.author.name,
+                        "author id": book.author.id
+                    }
+                )
     return jsonify(books)
 
 
+                
 
 @app.route('/allreviews', methods=['GET'])
 def read_allreviews():
