@@ -46,12 +46,14 @@ def create_review(authorid, bookid):
 
 @app.route('/allauthors', methods=['GET'])
 def all_authors():
+
     author_list = Author.query.all()
     authors = {"author_list": []}
     for author in author_list:
         authors["author_list"].append(
             {
-                "Author": author.name
+                "Author": author.name,
+                "Books": author.author.id.book.name
             }
         )
     return jsonify(authors)
