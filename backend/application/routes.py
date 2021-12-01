@@ -148,7 +148,7 @@ def delete_author(id):
     author = Author.query.get(id)
     db.session.delete(author)
     db.session.commit()
-    return Response(f"Deleted: {author}")
+    return Response(f"Deleted: {author.name}")
 
 @app.route('/delete/book/<int:id>', methods=['DELETE'])
 def delete_book(id):
