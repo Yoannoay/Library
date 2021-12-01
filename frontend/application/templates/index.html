@@ -6,7 +6,6 @@
     <table>
         <h2>Author</h2>
         <tr>
-            <td><b>Name</b></td>
             <br> {{ authors["Author"] }} </br>
         </tr>
     </table>
@@ -15,7 +14,7 @@
     <table>
     {% for book in authors["Books"] %}    
         <tr>
-            <td> {{ book["name"] }} </td>
+            <td> {{ book }} </td>
         </tr>
     {% endfor %}
     </table>
