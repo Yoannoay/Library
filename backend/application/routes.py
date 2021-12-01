@@ -143,17 +143,26 @@ def update_review(id):
 
 
 
-@app.route('/delete/author/<int:id>')
+@app.route('/delete/author/<int:id>', methods=['DELETE'])
 def delete_author(id):
     author = Author.query.get(id)
     db.session.delete(author)
     db.session.commit()
-    return Response(f"Deleted {author.name}")
+    return Response(f"Deleted: {author.name}")
 
-# @app.route('/delete/task/<int:id>', methods= ['DELETE'])
-# def delete_task(id):
-#     task = Tasks.query.get(id)
-#     db.session.delete(task)
-#     db.session.commit()
-#     return Response(f"Deleted task with ID: {id}")
+@app.route('/delete/book/<int:id>')
+def delete_book(id):
+    book = Book.query.get(id)
+    db.session.delete(book)
+    db.session.commit()
+    return Response(f"{book.name} : has been deleted")
+
+
+@app.route('/delete/review/<int:id>')
+def delete_review(id):
+    review = Review.query.get(id)
+    db.session.delete(review)
+    db.session.commit()
+    return Response(f"Deleted review: {review.id}")
+
 
