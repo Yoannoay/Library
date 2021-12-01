@@ -98,7 +98,7 @@ def read_allreviews():
                 "Book": review.book.name,
                 "Author": review.book.author.name,
                 "Rating": review.rating,
-                "Review": review.thoughts
+                "Review": review.thoughts,
                 "Review ID: ": review.id
 
             }
