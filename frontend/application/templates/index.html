@@ -4,7 +4,7 @@
     
     {% for authors in all_authors %}
     <table>
-        <h2>Author</h2>
+        <th>Author</th>
         <tr>
             <td> {{ authors["Author"] }} </td>
             <a href="{{ url_for('home') }}">home</a>
@@ -12,23 +12,23 @@
     </table>
 
     
+    <table></table>
+    <th> Books </th>
     
-    <h3> Books </h3>
-    <table>
     {% for book in authors["Books"] %}    
         <tr>
             <td> {{ book }} </td>
-            <a href="{{ url_for('home') }}">home</a>
+            <td> <a href="{{ url_for('home') }}">home</a> </td>
         </tr>
         
      
     {% endfor %}
     
     
-    
+    <hr size="1" width="85%" color="black"> 
 </table>
             
-<hr size="1" width="85%" color="black"> 
+
     
     {% endfor %}
 {% endblock body %}
