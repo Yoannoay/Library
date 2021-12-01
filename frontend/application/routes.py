@@ -8,8 +8,8 @@ import requests
 @app.route('/')
 @app.route('/home')
 def home():
-    all_authors = requests.get(f"http://library-backend:5000/allauthors").json()
-    app.logger.info(f"All_Authors: {author_list}")
+    all_authors = requests.get(f"http://library_frontend:5000/allauthors").json()
+    app.logger.info(f"All_Authors: {all_authors}")
     return render_template('index.html', title="Home", all_authors=all_authors["author_list"])
 
 @app.route('/allbooks', methods=['GET'])
