@@ -5,10 +5,10 @@ import requests
 
 backend_host = "library_backend:5000"
 
-@app.route('/')
-@app.route('/home')
+@app.route('/', methods= ['GET'])
+@app.route('/home', methods= ['GET'])
 def home():
-    all_reviews = requests.get(f"http://{backend_host}/allreviews").json()["author_list"]
+    all_reviews = requests.get(f"http://library_backend:5000/allreviews").json()["author_list"]
     app.logger.info(f"All_reviews: {all_reviews}")
     return render_template('index.html', title="Home", all_reviews=all_reviews["all reviews"])
 
