@@ -9,22 +9,21 @@ backend_host = "library_backend:5000"
 @app.route('/home', methods= ['GET'])
 def home():
     all_authors = requests.get(f"http://library_backend:5000/allauthors").json()["author_list"]
-    app.logger.info(f"All_authors: {all_authors}")
     return render_template('index.html', title="Home", all_authors=all_authors)
 
-@app.route('/allbooks', methods=['GET'])
-def books_list():
-    form = TaskForm()
+# @app.route('/allbooks', methods=['GET'])
+# def books_list():
+#     form = TaskForm()
 
-    if request.method == "POST":
-        response = requests.post(
-            f"http://{backend_host}/create/task",
-            json={"description": form.description.data}
-        )
-        app.logger.info(f"Response: {response.text}")
-        return redirect(url_for('home'))
+#     if request.method == "POST":
+#         response = requests.post(
+#             f"http://{backend_host}/create/task",
+#             json={"description": form.description.data}
+#         )
+#         app.logger.info(f"Response: {response.text}")
+#         return redirect(url_for('home'))
 
-    return render_template("create_task.html", title="Add a new Task", form=form)
+#     return render_template("create_task.html", title="Add a new Task", form=form)
 
 # @app.route('/read/allTasks')
 # def read_tasks():
@@ -39,20 +38,20 @@ def books_list():
 #         )
 #     return jsonify(tasks_dict)
 
-@app.route('/update/task/<int:id>', methods=['GET','POST'])
-def update_task(id):
-    form = TaskForm()
-    task = requests.get(f"http://{backend_host}/read/task/{id}").json()
-    app.logger.info(f"Task: {task}")
+# @app.route('/update/task/<int:id>', methods=['GET','POST'])
+# def update_task(id):
+#     form = TaskForm()
+#     task = requests.get(f"http://{backend_host}/read/task/{id}").json()
+#     app.logger.info(f"Task: {task}")
 
-    if request.method == "POST":
-        response = requests.put(
-            f"http://{backend_host}/update/task/{id}",
-            json={"description": form.description.data}
-        )
-        return redirect(url_for('home'))
+#     if request.method == "POST":
+#         response = requests.put(
+#             f"http://{backend_host}/update/task/{id}",
+#             json={"description": form.description.data}
+#         )
+#         return redirect(url_for('home'))
 
-    return render_template('update_task.html', task=task, form=form)
+#     return render_template('update_task.html', task=task, form=form)
 
 # @app.route('/delete/task/<int:id>')
 # def delete_task(id):
