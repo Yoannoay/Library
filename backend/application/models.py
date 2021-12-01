@@ -12,7 +12,8 @@ class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable= False)
 
-    reviews =db.relationship('Review', backref='book')
+    reviews =db.relationship('Review', backref='book', cascade="all, delete",
+        passive_deletes=True)
 
     author_id = db.Column(db.Integer, db.ForeignKey('author.id'), nullable=True)
     
