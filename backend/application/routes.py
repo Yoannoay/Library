@@ -61,7 +61,7 @@ def all_authors():
 
         authors["author_list"].append(
             {
-                "Author ID: ": writer.id
+                "Author ID: ": writer.id,
                 "Author": writer.name,
                 "Books": books
                 
