@@ -61,8 +61,10 @@ def all_authors():
 
         authors["author_list"].append(
             {
+                "Author ID: ": writer.id
                 "Author": writer.name,
                 "Books": books
+                
             }
         )
     
@@ -77,6 +79,7 @@ def all_books():
         books["book_list"].append(
             {
                 "Book": book.name,
+                "Book ID: ": book.id,
                 "author": book.author.name,
                 "author id": book.author.id 
             }
@@ -96,6 +99,7 @@ def read_allreviews():
                 "Author": review.book.author.name,
                 "Rating": review.rating,
                 "Review": review.thoughts
+                "Review ID: ": review.id
 
             }
         )
@@ -148,7 +152,7 @@ def delete_author(id):
     author = Author.query.get(id)
     for books in author.books:
         db.session.delete(books.name)
-        
+
     for review in author.book:
         db.session.delete(review.thoughts)
         db.session.delete(review.rating)
