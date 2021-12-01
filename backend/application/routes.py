@@ -146,9 +146,11 @@ def update_review(id):
 @app.route('/delete/author/<int:id>', methods=['DELETE'])
 def delete_author(id):
     author = Author.query.get(id)
-    db.session.delete(author.name)
+    books= author.books 
+    reviews= author.books.reviews
+    db.session.delete(author, books, reviews)
     db.session.commit()
-    return Response(f"Deleted: {author.name}")
+    return Response(f"Deleted: {author}")
 
 @app.route('/delete/book/<int:id>', methods=['DELETE'])
 def delete_book(id):
