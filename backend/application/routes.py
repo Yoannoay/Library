@@ -150,7 +150,7 @@ def delete_author(id):
     db.session.commit()
     return Response(f"Deleted: {author.name}")
 
-@app.route('/delete/book/<int:id>')
+@app.route('/delete/book/<int:id>', methods=['DELETE'])
 def delete_book(id):
     book = Book.query.get(id)
     db.session.delete(book)
@@ -158,7 +158,7 @@ def delete_book(id):
     return Response(f"{book.name} : has been deleted")
 
 
-@app.route('/delete/review/<int:id>')
+@app.route('/delete/review/<int:id>', methods=['DELETE'])
 def delete_review(id):
     review = Review.query.get(id)
     db.session.delete(review)
