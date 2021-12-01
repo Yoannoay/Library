@@ -10,7 +10,7 @@ backend_host = "library_backend:5000"
 def home():
     all_reviews = requests.get(f"http://{backend_host}/allreviews").json()
     app.logger.info(f"All_reviews: {all_reviews}")
-    return render_template('index.html', title="Home", all_reviews=all_reviews["reviews"])
+    return render_template('index.html', title="Home", all_reviews=all_reviews["all reviews"])
 
 @app.route('/create/task', methods=['GET','POST'])
 def create_task():
