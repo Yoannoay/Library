@@ -135,7 +135,13 @@ def update_review(id):
     review.thoughts = package["thoughts"]
     review.rating = package["rating"]
     db.session.commit()
-    return Response(f"Updated review of  "{review.book.name}", changed rating to "{review.rating}" and thoughts to "{review.thoughts}" ", mimetype='test/plain')
+    return Response(f"Updated review of  \"{review.book.name}\", changed rating to \"{review.rating}\" and thoughts to \"{review.thoughts}\" ", mimetype='test/plain')
+
+
+
+# DELETE ROUTES FOR ALL CLASSES
+
+
 
 # @app.route('/update/task/<int:id>', methods=['PUT'])
 # def update_task(id):
