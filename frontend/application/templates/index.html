@@ -7,6 +7,7 @@
         <h2>Author</h2>
         <tr>
             <td> {{ authors["Author"] }} </td>
+            <a href="{{ url_for('home') }}">home</a>
         </tr>
     </table>
 
@@ -17,6 +18,7 @@
     {% for book in authors["Books"] %}    
         <tr>
             <td> {{ book }} </td>
+            <a href="{{ url_for('home') }}">home</a>
         </tr>
         
      
