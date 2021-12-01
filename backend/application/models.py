@@ -2,14 +2,14 @@ from application import db
 
 class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
+    name = db.Column(db.String(30), nullable=False, default="Unknown", unique = True)
     
     books = db.relationship('Book', backref='author')
     reviews =db.relationship('Review', backref='author')
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
+    name = db.Column(db.String(30), nullable= False)
 
     reviews =db.relationship('Review', backref='book')
 
