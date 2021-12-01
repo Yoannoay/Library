@@ -4,7 +4,7 @@ from flask import render_template, Response, request, redirect, url_for, jsonify
 from os import getenv
 import json
 
-
+# CREATE ROUTES FOR ALL CLASSES
 
 @app.route('/create/author', methods=['POST'])
 
@@ -14,6 +14,7 @@ def create_author():
     db.session.add(new_author)
     db.session.commit()
     return Response(f"The author: {new_author.name}, has been added to the database", mimetype='text/plain')
+
 
 @app.route('/create/book', methods=['POST'])
 
@@ -26,7 +27,6 @@ def create_book():
     return Response(f"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database", mimetype='text/plain')
 
     
-    
 @app.route('/create/review', methods=['POST'])
 
 def create_review():
@@ -36,6 +36,14 @@ def create_review():
     db.session.add(new_review)
     db.session.commit()
     return Response("Thank you for adding your review and rating to the database", mimetype='text/plain')
+
+
+
+
+# READ ROUTES FOR ALL CLASSES
+
+
+
 
 @app.route('/allauthors', methods=['GET'])
 def all_authors():
@@ -50,7 +58,7 @@ def all_authors():
         for book in writer.books:
 
             books.append(book.name)
-            
+
         authors["author_list"].append(
             {
                 "Author": writer.name,
@@ -76,9 +84,7 @@ def all_books():
       
     return jsonify(books)
 
-
-                
-
+            
 @app.route('/allreviews', methods=['GET'])
 def read_allreviews():
     all_reviews = Review.query.all()
@@ -94,6 +100,23 @@ def read_allreviews():
             }
         )
     return jsonify(review_dict)
+
+
+
+# UPDATE ROUTES FOR ALL CLASSES
+
+
+
+@app.route('/update/<int:id>', methods=['PUT'])
+def update_author(id):
+    package= request.json
+    author = Author.query.get(id)
+
+    author.name = package["name"]
+    db.session.commit()
+    return Response(f"Updated Author {id}, to {author.name}", mimetype='test/plain')
+
+
 
 # @app.route('/update/task/<int:id>', methods=['PUT'])
 # def update_task(id):
