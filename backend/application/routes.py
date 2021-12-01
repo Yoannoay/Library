@@ -143,16 +143,12 @@ def update_review(id):
 
 
 
-# @app.route('/update/task/<int:id>', methods=['PUT'])
-# def update_task(id):
-#     package= request.json
-#     task = Tasks.query.get(id)
-
-
-#     task.description = package["description"]
-#     db.session.commit()
-#     return Response(f"Updated task (ID: {id}): {task.description}", mimetype='text/plain')
-
+@app.route('/delete/author/<int:id>')
+def delete_author(id):
+    author = Author.query.get(id)
+    db.session.delete(author)
+    db.session.commit()
+    return Response(f"Deleted {author.name}")
 
 # @app.route('/delete/task/<int:id>', methods= ['DELETE'])
 # def delete_task(id):
@@ -161,16 +157,3 @@ def update_review(id):
 #     db.session.commit()
 #     return Response(f"Deleted task with ID: {id}")
 
-# @app.route('/complete/task/<int:id>', methods=['PUT'])
-# def complete_task(id):
-#     task = Tasks.query.get(id)
-#     task.completed = True
-#     db.session.commit()
-#     return Response(f"Task with ID: {id} set to complete")
-
-# @app.route('/incomplete/task/<int:id>', methods=['PUT'])
-# def incomplete_task(id):
-#     task = Tasks.query.get(id)
-#     task.completed = False
-#     db.session.commit()
-#     return Response(f"Task with ID: {id} set to incomplete")
