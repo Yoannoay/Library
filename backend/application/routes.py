@@ -42,10 +42,15 @@ def all_authors():
 
     author_list = Author.query.all()
     authors = {"author_list": []}
+
     for writer in author_list:
+
         books = []
+
         for book in writer.books:
+
             books.append(book.name)
+            
         authors["author_list"].append(
             {
                 "Author": writer.name,
