@@ -128,7 +128,7 @@ def update_book(id):
 
 
 @app.route('/update/review/<int:id>', methods=['PUT'])
-def update_author(id):
+def update_review(id):
     package= request.json
     review = Review.query.get(id)
     
