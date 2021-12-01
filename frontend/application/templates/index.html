@@ -1,25 +1,26 @@
 {% extends "layout.html" %}
 {% block body %}
 
-    <h2>Author</h2>
+    
     {% for authors in all_authors %}
+    <table>
+        <h2>Author</h2>
+        <tr>
+            <td><b>Name</b></td>
+            <br> {{ authors["Author"] }} </br>
+        </tr>
+    </table>
     
-        <p>
-            <br> Author: {{ authors["Author"] }} </br>
-
-        </p>
-    <h2>Books</h2>
-
-    {% for book in authors["Books"] %       
-        
-        <p>
-    <br> {{ book["name"] }} </br>
-                       
-        </p>    
-
+    <h3> Books </h3>
+    <table>
+    {% for book in authors["Books"] %}    
+        <tr>
+            <td> {{ book["name"] }} </td>
+        </tr>
     {% endfor %}
-    {% endfor %}
-    
-    
+    </table>
+            
 
+    
+    {% endfor %}
 {% endblock body %}
