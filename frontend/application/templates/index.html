@@ -1,17 +1,15 @@
 {% extends "layout.html" %}
 {% block body %}
 
-    <h2>Reviews</h2>
-    {% for reviews in all_reviews %}
+    <h2>Authors</h2>
+    {% for author in all_authors %}
     
         <p>
-           {# <!-- Author: {{ reviews.book.author.name }}<br>
-            Book: {{ reviews.book.name }}<br>} --> #}
-            Rating: {{ reviews.rating }}<br>
-            Review: {{ reviews.thoughts }}<br>
+           <br> Author: {{ author.name }}</br>
+            <br> Books: {{ reviews.rating }}</br>
+           
             <a href="{{ url_for('books_list') }}">View books</a>
-            {# <a href="{{ url_for('delete_task', id=task.id) }}">Delete</a> #}
-            {# <!-- <a href="{{ url_for('complete_task', id=task.id) }}">Complete</a> --> #}
+           
         </p>    
 
     {% endfor %}
