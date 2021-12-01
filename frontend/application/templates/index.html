@@ -3,12 +3,13 @@
 
     <h2>Author</h2>
     {% for authors in all_authors %}
-    {% for book in authors["Books"] %}
+    }
         <p>
             <br> Author: {{ authors["Author"] }}</br>
 
     <h2>Books</h2>
-            
+    
+    {% for book in authors["Books"] %       
         
     <br> {{ book }}</br>
                        
