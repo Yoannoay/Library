@@ -3,17 +3,17 @@ from application.forms import TaskForm
 from flask import render_template, request, redirect, url_for, jsonify
 import requests
 
-backend_host = "todo-app_backend:5000"
+# backend_host = "library_backend:5000"
 
 @app.route('/')
 @app.route('/home')
 def home():
-    all_tasks = requests.get(f"http://{backend_host}/read/allTasks").json()
-    app.logger.info(f"Tasks: {all_tasks}")
-    return render_template('index.html', title="Home", all_tasks=all_tasks["tasks"])
+    all_authors = requests.get(f"http://library_frontend:5000/allauthors").json()
+    app.logger.info(f"All_Authors: {all_authors}")
+    return render_template('index.html', title="Home", all_authors=all_authors["author_list"])
 
-@app.route('/create/task', methods=['GET','POST'])
-def create_task():
+@app.route('/allbooks', methods=['GET'])
+def books_list():
     form = TaskForm()
 
     if request.method == "POST":
