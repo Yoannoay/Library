@@ -107,7 +107,7 @@ def read_allreviews():
 
 
 
-@app.route('/update/<int:id>', methods=['PUT'])
+@app.route('/update/author/<int:id>', methods=['PUT'])
 def update_author(id):
     package= request.json
     author = Author.query.get(id)
@@ -117,6 +117,25 @@ def update_author(id):
     return Response(f"Updated Author {id}, to {author.name}", mimetype='test/plain')
 
 
+@app.route('/update/book/<int:id>', methods=['PUT'])
+def update_book(id):
+    package= request.json
+    book = Book.query.get(id)
+
+    book.name = package["name"]
+    db.session.commit()
+    return Response(f"Updated Book {id}, to {book.name}", mimetype='test/plain')
+
+
+@app.route('/update/review/<int:id>', methods=['PUT'])
+def update_author(id):
+    package= request.json
+    review = Review.query.get(id)
+    
+    review.thoughts = package["thoughts"]
+    review.rating = package["rating"]
+    db.session.commit()
+    return Response(f"Updated review of book {review.book.name}, changed rating to {review.rating} and thoughts to {review.thoughts}", mimetype='test/plain')
 
 # @app.route('/update/task/<int:id>', methods=['PUT'])
 # def update_task(id):
