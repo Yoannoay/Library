@@ -3,22 +3,22 @@
 
     
     {% for authors in all_authors %}
-    <table>
-        <th>Author</th>
-        <tr>
-            <td> {{ authors["Author"] }} </td>
+   
+        <h1>Author</h1>
+    
+            <p> {{ authors["Author"] }} </p>
             <a href="{{ url_for('home') }}">home</a>
-        </tr>
-    </table>
+        
+    
 
     
-    <table></table>
-    <th> Books </th>
+    
+        <h2> Books </h2>
     
     {% for book in authors["Books"] %}    
-        <tr>
-            <td> {{ book }} </td>
-            <td> <a href="{{ url_for('home') }}">home</a> </td>
+        
+            <p> {{ book }} </p>
+            <p> <a href="{{ url_for('home') }}">home</a> </p>
         </tr>
         
      
