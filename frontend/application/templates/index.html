@@ -5,8 +5,8 @@
     {% for reviews in all_reviews %}
     
         <p>
-            Author: {{ reviews.book.author.name }}<br>
-            Book: {{ reviews.book.name }}<br>
+           {# <!-- Author: {{ reviews.book.author.name }}<br>
+            Book: {{ reviews.book.name }}<br>} --> #}
             Rating: {{ reviews.rating }}<br>
             Review: {{ reviews.thoughts }}<br>
             <a href="{{ url_for('all_books') }}">View books</a>
