@@ -9,7 +9,7 @@ class Author(db.Model):
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
+    name = db.Column(db.String(30), nullable= False, default="Unknown", unique = True)
 
     reviews =db.relationship('Review', backref='book')
 
