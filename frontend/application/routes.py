@@ -3,12 +3,12 @@ from application.forms import TaskForm
 from flask import render_template, request, redirect, url_for, jsonify
 import requests
 
-backend_host = "library_backend:5000"
+# backend_host = "library_backend:5000"
 
 @app.route('/')
 @app.route('/home')
 def home():
-    all_authors = requests.get(f"http://{backend_host}/allauthors").json()
+    all_authors = requests.get(f"http://library-backend/allauthors").json()
     app.logger.info(f"All_Authors: {author_list}")
     return render_template('index.html', title="Home", all_authors=all_authors["author_list"])
 
