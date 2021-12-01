@@ -10,7 +10,7 @@ backend_host = "library_backend:5000"
 def home():
     all_authors = requests.get(f"http://library_backend:5000/allauthors").json()["author_list"]
     app.logger.info(f"All_authors: {all_authors}")
-    return render_template('index.html', title="Home", all_authors=all_authors["author_list"])
+    return render_template('index.html', title="Home", all_authors=all_authors])
 
 @app.route('/allbooks', methods=['GET'])
 def books_list():
