@@ -13,7 +13,7 @@ def create_author():
     new_author = Author(name=package["name"])
     db.session.add(new_author)
     db.session.commit()
-    return Response(f"The author: {new_author.name}, has been added to the database", mimetype='text/plain')
+    return Response(f"The author: {new_author.name}, has been added to the database with id {new_author.id}", mimetype='text/plain')
 
 
 @app.route('/create/book', methods=['POST'])
@@ -24,7 +24,7 @@ def create_book():
     new_book = Book(name=package["name"], author_id=package["author_id"])
     db.session.add(new_book)
     db.session.commit()
-    return Response(f"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database", mimetype='text/plain')
+    return Response(f"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database under the id {new_book.id}", mimetype='text/plain')
 
     
 @app.route('/create/review', methods=['POST'])
@@ -35,7 +35,7 @@ def create_review():
     new_review = Review(rating=package["rating"], thoughts=package["thoughts"], book_id=package["book_id"])
     db.session.add(new_review)
     db.session.commit()
-    return Response("Thank you for adding your review and rating to the database", mimetype='text/plain')
+    return Response("Thank you for adding your review and rating to the database, id: {new_review.id}", mimetype='text/plain')
 
 
 
