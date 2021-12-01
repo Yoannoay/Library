@@ -35,7 +35,7 @@ def create_review():
     new_review = Review(rating=package["rating"], thoughts=package["thoughts"], book_id=package["book_id"])
     db.session.add(new_review)
     db.session.commit()
-    return Response("Thank you for adding your review and rating to the database, id: {new_review.id}", mimetype='text/plain')
+    return Response(f"Thank you for adding your review and rating to the database, id: {new_review.id}", mimetype='text/plain')
 
 
 
