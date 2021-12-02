@@ -29,24 +29,24 @@ def create_author():
     return render_template("create_author.html", title="Add Author", form=form)
 
 
-@app.route('/create/book/<int:id>', methods=["GET", "POST"])
-def create_book():
-    form = CreatePlanetForm()
+# @app.route('/create/book/<int:id>', methods=["GET", "POST"])
+# def create_book():
+#     form = CreatePlanetForm()
 
-    if request.method == "POST":
-        response = requests.post(
-            f"http://{backend}/create/planet",
-            json={
-                "name": form.name.data,
-                "mass": form.mass.data,
-                "type": form.type.data,
-                "star_system": form.star_system.data
-            }
-        )
-        app.logger.info(f"Response: {response.text}")
-        return redirect(url_for("home"))
+#     if request.method == "POST":
+#         response = requests.post(
+#             f"http://{backend}/create/planet",
+#             json={
+#                 "name": form.name.data,
+#                 "mass": form.mass.data,
+#                 "type": form.type.data,
+#                 "star_system": form.star_system.data
+#             }
+#         )
+#         app.logger.info(f"Response: {response.text}")
+#         return redirect(url_for("home"))
 
-    return render_template("create_planet.html", title="Add Planet", form=form)
+#     return render_template("create_planet.html", title="Add Planet", form=form)
 
 
 # @app.route('/allbooks', methods=['GET'])
