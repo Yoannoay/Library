@@ -12,6 +12,10 @@ def home():
     return render_template('index.html', title="Home", all_authors=all_authors)
 
 
+
+# ALL CREATE ROUTES
+
+
 @app.route('/create/author', methods=["GET", "POST"])
 def create_author():
     form = CreateAuthor()
@@ -46,6 +50,25 @@ def create_book(id):
         return redirect(url_for("home"))
 
     return render_template("create_book.html", title="New Book", form=form, id=id)
+
+
+@app.route('/create/review/<int:id>', methods=["GET", "POST"])
+def create_review(id):
+    form = NewReview()
+    book_id = id
+
+    if request.method == "POST":
+        response = requests.post(
+            f"http://library_backend:5000/create/review",
+            json={
+                "rating": form.rating.data,
+                "thoughts": form.thoughts.data,
+                "book_id": book_id
+                 } 
+        )
+        return redirect(url_for("home"))
+
+    return render_template("create_review.html", title="New Review", form=form, id=id)
 
 
 # @app.route('/allbooks', methods=['GET'])
