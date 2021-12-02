@@ -15,6 +15,7 @@ def home():
 @app.route('/create/author', methods=["GET", "POST"])
 def create_author():
     form = CreateAuthor()
+    
 
     if request.method == "POST":
         response = requests.post(
@@ -32,13 +33,14 @@ def create_author():
 @app.route('/create/book/<int:id>', methods=["GET", "POST"])
 def create_book(id):
     form = NewBook()
+    
 
     if request.method == "POST":
         response = requests.post(
             f"http://library_backend:5000/create/book/<int:id>",
             json={
                 "name": form.name.data,
-                 }, book.author_id=id
+                 }, id
         )
         return redirect(url_for("home"))
 
