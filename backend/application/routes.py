@@ -16,12 +16,12 @@ def create_author():
     return Response(f"The author: {new_author.name}, has been added to the database with id {new_author.id}", mimetype='text/plain')
 
 
-@app.route('/create/book', methods=['POST'])
+@app.route('/create/book/<int:id>', methods=['POST'])
 
-def create_book():
+def create_book(id):
     package = request.json
 
-    new_book = Book(name=package["name"], author_id=package["author_id"])
+    new_book = Book(name=package["name"], author_id=id)
     db.session.add(new_book)
     db.session.commit()
     return Response(f"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database under the id {new_book.id}", mimetype='text/plain')
@@ -150,12 +150,12 @@ def update_review(id):
 @app.route('/delete/author/<int:id>', methods=['DELETE'])
 def delete_author(id):
     author = Author.query.get(id)
-    for books in author.books:
-        db.session.delete(books.name)
+    # for books in author.books:
+    #     db.session.delete(books.name)
 
-    for review in author.book:
-        db.session.delete(review.thoughts)
-        db.session.delete(review.rating)
+    # for review in author.book:
+    #     db.session.delete(review.thoughts)
+    #     db.session.delete(review.rating)
    
     db.session.delete(author)
     db.session.commit()
