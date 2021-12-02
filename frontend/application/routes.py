@@ -1,5 +1,5 @@
 from application import app
-from application.forms import TaskForm
+from application.forms import CreateAuthor
 from flask import render_template, request, redirect, url_for, jsonify
 import requests
 
@@ -27,7 +27,7 @@ def create_author():
         return redirect(url_for("home"))
 
     return render_template("create_author.html", title="Add Author", form=form)
-    
+
 
 @app.route('/create/book/<int:id>', methods=["GET", "POST"])
 def create_book():
