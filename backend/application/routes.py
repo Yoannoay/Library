@@ -18,7 +18,7 @@ def create_author():
 
 @app.route('/create/book', methods=['POST'])
 
-def create_book(id):
+def create_book():
     package = request.json
 
     new_book = Book(name=package["name"], author_id=package["author_id"])
