@@ -6,7 +6,9 @@
    
         <h1 style="text-align:center;">Author</h1>
     
-            <p style="font-size:160%; text-align:center;"> {{ authors["Author"] }} </p>
+            <p >  </p>
+            <p style="font-size:160%; text-align:center;"> 
+                <a href="{{ url_for('create_book', id=author.id) }}"> Add a new book to {{ authors["Author"] }}</a> </p>
             
         
     
@@ -18,7 +20,7 @@
     {% for book in authors["Books"] %}    
         
             <p style="text-align:center;"> {{ book }} </p>
-            <p style="text-align:center;"> <a href="{{ url_for('home') }}">home</a> </p>
+            <p style="text-align:center;"> <a href="{{ url_for('create_book') }}">home</a> </p>
         
         
      
