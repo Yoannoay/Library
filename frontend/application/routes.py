@@ -42,7 +42,6 @@ def create_book(id):
                 
             }
         )
-        app.logger.info(f"Response: {response.text}")
         return redirect(url_for("home"))
 
     return render_template("create_book.html", title="New Book", form=form)
