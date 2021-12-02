@@ -4,16 +4,16 @@
     
     {% for authors in all_authors %}
    
-        <h1>Author</h1>
+        <h1 >Author</h1>
     
-            <p> {{ authors["Author"] }} </p>
-            <a href="{{ url_for('home') }}">home</a>
+            <p style="font-size:160%;"> {{ authors["Author"] }} </p>
+            <p style="text-align:center;"> <a href="{{ url_for('home') }}">home</a> </p>
         
     
 
     
     
-        <h2> Books </h2>
+        <h2 style="text-align:center;"> Books </h2>
     
     {% for book in authors["Books"] %}    
         
