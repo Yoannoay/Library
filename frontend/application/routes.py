@@ -11,6 +11,25 @@ def home():
     all_authors = requests.get(f"http://library_backend:5000/allauthors").json()["author_list"]
     return render_template('index.html', title="Home", all_authors=all_authors)
 
+
+@app.route('/create/book/<int:id>', methods=["GET", "POST"])
+def create_planet():
+    form = CreatePlanetForm()
+
+    if request.method == "POST":
+        response = requests.post(
+            f"http://{backend}/create/planet",
+            json={
+                "name": form.name.data,
+                "mass": form.mass.data,
+                "type": form.type.data,
+                "star_system": form.star_system.data
+            }
+        )
+        app.logger.info(f"Response: {response.text}")
+        return redirect(url_for("home"))
+
+    return render_template("create_planet.html", title="Add Planet", form=form)
 # @app.route('/allbooks', methods=['GET'])
 # def books_list():
 #     form = TaskForm()
