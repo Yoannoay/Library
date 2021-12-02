@@ -21,7 +21,7 @@ def create_author():
 def create_book(id):
     package = request.json
 
-    new_book = Book(name=package["name"], author_id=package["author_id"])
+    new_book = Book(name=package["name"], author_id=request.args.get('id'))
     db.session.add(new_book)
     db.session.commit()
     return Response(f"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database under the id {new_book.id}", mimetype='text/plain')
