@@ -1,5 +1,5 @@
 from application import app
-from application.forms import CreateAuthor
+from application.forms import CreateAuthor, NewBook
 from flask import render_template, request, redirect, url_for, jsonify
 import requests
 
