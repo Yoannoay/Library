@@ -54,12 +54,12 @@ def all_authors():
     for writer in author_list:
 
         books = []
-        book_ids = ""
+        book_ids = []
 
         for book in writer.books:
 
             books.append(book.name)
-            book_ids=book.id
+            book_ids.append(book.id)
 
         authors["author_list"].append(
             {
