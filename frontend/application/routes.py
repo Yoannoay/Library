@@ -45,7 +45,7 @@ def create_book(id):
         )
         return redirect(url_for("home"))
 
-    return render_template("create_book.html", title="New Book", form=form)
+    return render_template("create_book.html", title="New Book", form=form, id=id)
 
 
 # @app.route('/allbooks', methods=['GET'])
