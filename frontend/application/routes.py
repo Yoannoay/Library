@@ -41,7 +41,7 @@ def create_book(id):
             json={
                 "name": form.name.data,
                 "author_id": author_id
-                 }, 
+                 } 
         )
         return redirect(url_for("home"))
 
