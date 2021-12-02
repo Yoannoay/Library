@@ -38,7 +38,7 @@ def create_book(id):
             f"http://library_backend:5000/create/book/<int:id>",
             json={
                 "name": form.name.data,
-                 }, author_id=id
+                 }, book.author_id=id
         )
         return redirect(url_for("home"))
 
