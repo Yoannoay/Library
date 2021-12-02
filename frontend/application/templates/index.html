@@ -19,12 +19,12 @@
         <h2 style="text-align:center;"> Books </h2>
     
     {% for book in authors["Books"] %}    
-    {% for id in authors["Book ID: "] %}
+    
   
 
-            <p style="text-align:center;"> {{ book }} </p>
-            {# <!-- <p style="text-align:center;"> {{ authors["Book ID: "] }} </p>
-            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_review', id = (authors["Book ID: "])  ) }}"> New Review</a> </p> --> #}
+            <p style="text-align:center;"> {{ book["name"] }} </p>
+            
+            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_review', id = book["ID"]  ) }}"> New Review</a> </p>
             
         
         
