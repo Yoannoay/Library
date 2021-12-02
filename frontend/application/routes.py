@@ -12,8 +12,25 @@ def home():
     return render_template('index.html', title="Home", all_authors=all_authors)
 
 
+@app.route('/create/author', methods=["GET", "POST"])
+def create_author():
+    form = CreateAuthor()
+
+    if request.method == "POST":
+        response = requests.post(
+            f"http://library_backend:5000/create/author",
+            json={
+                "name": form.name.data,
+            }
+        )
+        
+        return redirect(url_for("home"))
+
+    return render_template("create_author.html", title="Add Author", form=form)
+    
+
 @app.route('/create/book/<int:id>', methods=["GET", "POST"])
-def create_planet():
+def create_book():
     form = CreatePlanetForm()
 
     if request.method == "POST":
@@ -30,6 +47,8 @@ def create_planet():
         return redirect(url_for("home"))
 
     return render_template("create_planet.html", title="Add Planet", form=form)
+
+
 # @app.route('/allbooks', methods=['GET'])
 # def books_list():
 #     form = TaskForm()

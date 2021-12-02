@@ -4,7 +4,7 @@
     
     {% for authors in all_authors %}
    
-        <h1 >Author</h1>
+        <h1 text-align:center;">Author</h1>
     
             <p style="font-size:160%; text-align:center;"> {{ authors["Author"] }} </p>
             <p style="text-align:center;"> <a href="{{ url_for('home') }}">home</a> </p>
@@ -17,8 +17,8 @@
     
     {% for book in authors["Books"] %}    
         
-            <p> {{ book }} </p>
-            <p> <a href="{{ url_for('home') }}">home</a> </p>
+            <p text-align:center;"> {{ book }} </p>
+            <p text-align:center;"> <a href="{{ url_for('home') }}">home</a> </p>
         
         
      
