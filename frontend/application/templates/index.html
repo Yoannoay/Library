@@ -5,7 +5,7 @@
     {% for authors in all_authors %}
    
         <h1 style="text-align:center;">Author</h1>
-    
+
             <p style="font-size:160%; text-align:center;"> {{ authors["Author"] }} </p>
     
             <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_book', id = authors["Author ID: "] ) }}"> New Book</a> </p>
@@ -30,14 +30,27 @@
         
      
     {% endfor %}
+
+            <p >  </p>
+            <p style="font-size:160%; text-align:center;"> 
+                <a href="{{ url_for('create_book', id=author.id) }}"> Add a new book to {{ authors["Author"] }}</a> </p>
+            
+        
+    
+
+  
+        
+        
+     
+
     {% endfor %}
     
     
     <hr size="1" width="85%" color="black"> 
-</table>
+
             
 
     
     {% endfor %}
-    
+
 {% endblock body %}

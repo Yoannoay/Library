@@ -8,6 +8,7 @@ class CreateAuthor(FlaskForm):
 
 class NewBook(FlaskForm):
     name = StringField("Book title: ", validators=[DataRequired()])
+
     submit = SubmitField("Add Book")
 
 class NewReview(FlaskForm):
@@ -17,3 +18,4 @@ class NewReview(FlaskForm):
     thoughts = StringField("Review: ", validators=[DataRequired()])
 
     submit = SubmitField("Submit review")
+
