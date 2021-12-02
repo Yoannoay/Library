@@ -4,7 +4,7 @@ class Author(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(30), nullable=False, default="Unknown", unique = True)
     
-    books = db.relationship('Book', backref='author', cascade="all, delete",
+    books = db.relationship('Book', backref='author', cascade="delete",
         passive_deletes=True)
     reviews =db.relationship('Review', backref='author')
 
