@@ -5,7 +5,7 @@
     {% for authors in all_authors %}
    
         <h1 style="text-align:center;">Author</h1>
-        <p style="font-size:105%; text-align:center;"> {{ authors["Author"] </p>
+        <p style="font-size:105%; text-align:center;"> {{ authors["Author"] }} </p>
 
     
             <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_book', id = authors["Author ID: "] ) }}"> New Book</a> </p>
