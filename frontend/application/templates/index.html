@@ -3,7 +3,7 @@
 
     
     {% for authors in all_authors %}
-    {% for id in authors["Book ID: "]}
+    {% for id in authors["Book ID: "] %}
         <h1 style="text-align:center;">Author</h1>
     
             <p style="font-size:160%; text-align:center;"> {{ authors["Author"] }} </p>
@@ -21,7 +21,7 @@
     {% for book in authors["Books"] %}    
     
             <p style="text-align:center;"> {{ book }} </p>
-            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_review', id = authors["Book ID: "] ) }}"> New Review</a> </p>
+            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_review', id = id["Book ID: "] ) }}"> New Review</a> </p>
             
         
         
