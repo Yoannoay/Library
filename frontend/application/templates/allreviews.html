@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    
+    {% for reviews in all_reviews %}
+   
+        <h1 style="font-size:190%; text-align:center;">Book</h1><
+            p style="font-size:80%; text-align:center;"> {{ reviews["Book"] }} </p>
+
+        <h1 style="font-size:190%; text-align:center;">Rating</h1>
+            <p style="font-size:80%; text-align:center;"> {{ reviews["Rating"] }} </p>
+
+        <h1 style="font-size:190%; text-align:center;">Review</h1>
+            <p style="font-size:80%; text-align:center;"> {{ reviews["Review"] }} </p>
+                     
+        
+        
+     
+    
+    
+    
+    <hr size="1" width="85%" color="black"> 
+
+            
+
+    
+    {% endfor %}
+{% endblock body %}

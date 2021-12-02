@@ -5,11 +5,19 @@ import requests
 
 backend_host = "library_backend:5000"
 
+# ALL READ ROUTES
+
 @app.route('/', methods= ['GET'])
 @app.route('/home', methods= ['GET'])
 def home():
     all_authors = requests.get(f"http://library_backend:5000/allauthors").json()["author_list"]
     return render_template('index.html', title="Home", all_authors=all_authors)
+
+
+@app.route('/allreviews', methods= ['GET'])
+def allreviews():
+    all_reviews = requests.get(f"http://library_backend:5000/allreviews").json()["all reviews"]
+    return render_template('allreviews.html', title="Home of Reviews", all_reviews=all_reviews)
 
 
 
@@ -69,6 +77,7 @@ def create_review(id):
         return redirect(url_for("home"))
 
     return render_template("create_review.html", title="New Review", form=form, id=id)
+
 
 
 # @app.route('/allbooks', methods=['GET'])
