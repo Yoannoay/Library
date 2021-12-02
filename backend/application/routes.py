@@ -16,7 +16,7 @@ def create_author():
     return Response(f"The author: {new_author.name}, has been added to the database with id {new_author.id}", mimetype='text/plain')
 
 
-@app.route('/create/book/<int:id>', methods=['POST'])
+@app.route('/create/book', methods=['POST'])
 
 def create_book(id):
     package = request.json
