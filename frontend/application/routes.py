@@ -33,14 +33,14 @@ def create_author():
 @app.route('/create/book/<int:id>', methods=["GET", "POST"])
 def create_book(id):
     form = NewBook()
-    
+    author_id = id
 
     if request.method == "POST":
         response = requests.post(
             f"http://library_backend:5000/create/book/<int:id>",
             json={
                 "name": form.name.data,
-                "author_id": id
+                "author_id": author_id
                  }, 
         )
         return redirect(url_for("home"))
