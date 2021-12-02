@@ -53,7 +53,7 @@ def create_book(id):
 
     if request.method == "POST":
         response = requests.post(
-            f"http://library_backend:5000/create/book",
+            f"http://library_backend:5000/create/book/<int:id>",
             json={
                 "name": form.name.data,
                 "author_id": author_id
