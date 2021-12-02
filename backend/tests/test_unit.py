@@ -1,14 +1,14 @@
 from flask import url_for
 from flask_testing import TestCase
 from application import app, db
-from application.models import Tasks
+from application.models import Author, Book, Review
 
 class TestBase(TestCase):
 
     def create_app(self):
         # Defines the flask object's configuration for the unit tests
         app.config.update(
-            SQLALCHEMY_DATABASE_URI='sqlite:///',
+            SQLALCHEMY_DATABASE_URI={DATABASE_URI},
             DEBUG=True,
             WTF_CSRF_ENABLED=False
         )
@@ -17,7 +17,10 @@ class TestBase(TestCase):
     def setUp(self):
         # Will be called before every test
         db.create_all()
-        db.session.add(Tasks(description="Run unit tests"))
+        db.session.add(Author(name="Pytest"))
+        db.session.add(Book(name="The adventures of Pytest"))
+        db.session.add(Review(rating=5, thoughts="Boring book but good for testing"))
+
         db.session.commit()
 
     def tearDown(self):
@@ -27,37 +30,92 @@ class TestBase(TestCase):
 
 class TestViews(TestBase):
     # Test whether we get a successful response from our routes
-    def test_home_get(self):
-        response = self.client.get(url_for('home'))
+    def test_authorcreate_get(self):
+        response = self.client.get(url_for('create_author'))
         self.assert200(response)
     
-    def test_create_task_get(self):
-        response = self.client.get(url_for('create_task'))
+    def test_bookcreate_get(self):
+        response = self.client.get(url_for('create_book'))
         self.assert200(response)
 
-    def test_read_tasks_get(self):
-        response = self.client.get(url_for('read_tasks'))
+    def test_reviewcreate_get(self):
+        response = self.client.get(url_for('create_review'))
         self.assert200(response)
 
-    def test_update_task_get(self):
-        response = self.client.get(url_for('update_task', id=1))
+    def test_viewauthors_get(self):
+        response = self.client.get(url_for('all_authors'))
         self.assert200(response)
+    
+    def test_viewbooks_get(self):
+        response = self.client.get(url_for('all_books'))
+        self.assert200(response)
+
+    def test_viewreviews_get(self):
+        response = self.client.get(url_for('read_allreviews'))
+        self.assert200(response)
+
+    def test_update_author_get(self):
+        response = self.client.get(url_for('update_author'))
+        self.assert200(response)
+
+    def test_update_book_get(self):
+        response = self.client.get(url_for('update_book'))
+        self.assert200(response)
+
+    def test_update_review_get(self):
+        response = self.client.get(url_for('update_review'))
+        self.assert200(response)
+
+    def test_authordelete_get(self):
+        response = self.client.get(url_for('delete_author'))
+        self.assert200(response)
+
+    def test_bookdelete_get(self):
+        response = self.client.get(url_for('delete_book'))
+        self.assert200(response)
+
+    def test_reviewdelete_get(self):
+        response = self.client.get(url_for('delete_review'))
+        self.assert200(response)
+
+
+
 
 class TestRead(TestBase):
 
-    def test_read_home_tasks(self):
-        response = self.client.get(url_for('home'))
+    def test_viewauthors(self):
+        response = self.client.get(url_for('all_authors'))
         self.assertIn(b"Run unit tests", response.data)
     
-    def test_read_tasks_dictionary(self):
-        response = self.client.get(url_for('read_tasks'))
+    def test_viewbooks(self):
+        response = self.client.get(url_for('all_books'))
+        self.assertIn(b"Run unit tests", response.data)
+    
+    def test_viewreviews(self):
+        response = self.client.get(url_for('read_allreviews'))
         self.assertIn(b"Run unit tests", response.data)
 
 class TestCreate(TestBase):
 
-    def test_create_task(self):
+    def test_authorcreate(self):
         response = self.client.post(
-            url_for('create_task'),
+            url_for('create_author'),
+            data={"description": "Testing create functionality"},
+            follow_redirects=True
+        )
+        self.assertIn(b"Testing create functionality", response.data)
+   
+    def test_bookcreate(self):
+        response = self.client.post(
+            url_for('create_book'),
+            data={"description": "Testing create functionality"},
+            follow_redirects=True
+        )
+        self.assertIn(b"Testing create functionality", response.data)
+   
+    def test_reviewcreate(self):
+        response = self.client.post(
+            url_for('create_review'),
             data={"description": "Testing create functionality"},
             follow_redirects=True
         )
@@ -65,28 +123,51 @@ class TestCreate(TestBase):
     
 class TestUpdate(TestBase):
 
-    def test_update_task(self):
+    def test_updateauthor(self):
         response = self.client.post(
-            url_for('update_task', id=1),
+            url_for('update_author', id=1),
             data={"description": "Testing update functionality"},
             follow_redirects=True
         )
         self.assertIn(b"Testing update functionality", response.data)
     
-    def test_complete_task(self):
-        response = self.client.get(url_for('complete_task', id=1), follow_redirects=True)
-        self.assertEqual(Tasks.query.get(1).completed, True)
+    def test_updatebook(self):
+        response = self.client.post(
+            url_for('update_book', id=1),
+            data={"description": "Testing update functionality"},
+            follow_redirects=True
+        )
+        self.assertIn(b"Testing update functionality", response.data)
     
-    def test_incomplete_task(self):
-        response = self.client.get(url_for('incomplete_task', id=1), follow_redirects=True)
-        self.assertEqual(Tasks.query.get(1).completed, False)
+    def test_updatereview(self):
+        response = self.client.post(
+            url_for('update_review', id=1),
+            data={"description": "Testing update functionality"},
+            follow_redirects=True
+        )
+        self.assertIn(b"Testing update functionality", response.data)
+    
         
 
 class TestDelete(TestBase):
 
-    def test_delete_task(self):
+    def test_delete_author(self):
         response = self.client.get(
-            url_for('delete_task', id=1),
+            url_for('delete_author', id=1),
+            follow_redirects=True
+        )
+        self.assertNotIn(b"Run unit tests", response.data)
+    
+    def test_delete_book(self):
+        response = self.client.get(
+            url_for('delete_book', id=1),
+            follow_redirects=True
+        )
+        self.assertNotIn(b"Run unit tests", response.data)
+    
+    def test_delete_review(self):
+        response = self.client.get(
+            url_for('delete_review', id=1),
             follow_redirects=True
         )
         self.assertNotIn(b"Run unit tests", response.data)
