@@ -19,11 +19,11 @@
         <h2 style="text-align:center;"> Books </h2>
     
     {% for book in authors["Books"] %}    
-    {{ i = 0 }}
+    
     {% while i < len(authors["Book ID: "])}
 
             <p style="text-align:center;"> {{ book }} </p>
-            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_review', id = (authors["Book ID: "])[i]  ) }}"> New Review</a> </p>
+            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_review', id = (authors["Book ID: "][i])  ) }}"> New Review</a> </p>
             
         
         

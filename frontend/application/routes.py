@@ -17,6 +17,7 @@ def home():
 @app.route('/allreviews', methods= ['GET'])
 def allreviews():
     all_reviews = requests.get(f"http://library_backend:5000/allreviews").json()["all reviews"]
+    i = 0
     return render_template('allreviews.html', title="Home of Reviews", all_reviews=all_reviews)
 
 
