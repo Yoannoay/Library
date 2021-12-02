@@ -65,7 +65,7 @@ def all_authors():
             {
                 "Author ID: ": writer.id,
                 "Author": writer.name,
-                "Books": books,
+                "Books": books
                 
             }
         )
