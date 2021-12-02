@@ -74,7 +74,7 @@ def create_review(id):
                 "book_id": book_id
                  } 
         )
-        return redirect(url_for("home"))
+        return redirect(url_for("allreviews"))
 
     return render_template("create_review.html", title="New Review", form=form, id=id)
 
