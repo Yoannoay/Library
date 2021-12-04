@@ -8,7 +8,7 @@ class TestBase(TestCase):
     def create_app(self):
         # Defines the flask object's configuration for the unit tests
         app.config.update(
-            SQLALCHEMY_DATABASE_URI={DATABASE_URI},
+            SQLALCHEMY_DATABASE_URI='sqlite:///',
             DEBUG=True,
             WTF_CSRF_ENABLED=False
         )
@@ -28,124 +28,115 @@ class TestBase(TestCase):
         db.session.remove()
         db.drop_all()
 
-class TestViews(TestBase):
-    # Test whether we get a successful response from our routes
-    def test_authorcreate_get(self):
-        response = self.client.get(url_for('create_author'))
-        self.assert200(response)
-    
-    def test_bookcreate_get(self):
-        response = self.client.get(url_for('create_book'))
-        self.assert200(response)
-
-    def test_reviewcreate_get(self):
-        response = self.client.get(url_for('create_review'))
-        self.assert200(response)
-
-    def test_viewauthors_get(self):
-        response = self.client.get(url_for('all_authors'))
-        self.assert200(response)
-    
-    def test_viewbooks_get(self):
-        response = self.client.get(url_for('all_books'))
-        self.assert200(response)
-
-    def test_viewreviews_get(self):
-        response = self.client.get(url_for('read_allreviews'))
-        self.assert200(response)
-
-    def test_update_author_get(self):
-        response = self.client.get(url_for('update_author'))
-        self.assert200(response)
-
-    def test_update_book_get(self):
-        response = self.client.get(url_for('update_book'))
-        self.assert200(response)
-
-    def test_update_review_get(self):
-        response = self.client.get(url_for('update_review'))
-        self.assert200(response)
-
-    def test_authordelete_get(self):
-        response = self.client.get(url_for('delete_author'))
-        self.assert200(response)
-
-    def test_bookdelete_get(self):
-        response = self.client.get(url_for('delete_book'))
-        self.assert200(response)
-
-    def test_reviewdelete_get(self):
-        response = self.client.get(url_for('delete_review'))
-        self.assert200(response)
-
-
 
 
 class TestRead(TestBase):
 
     def test_viewauthors(self):
         response = self.client.get(url_for('all_authors'))
-        self.assertIn(b"Run unit tests", response.data)
+        authors = {
+    "author_list": [
+        {
+            "Author": "Pytest",
+            "Author ID: ": 1,
+            "Books": [
+                {
+                    "ID": 1,
+                    "name": "The adventures of Pytest"
+                }
+            ]
+        }
+    ]
+}
+        self.assertEquals(authors, response.json)
     
+
+
+
     def test_viewbooks(self):
         response = self.client.get(url_for('all_books'))
-        self.assertIn(b"Run unit tests", response.data)
+        books = {
+    "book_list": [
+        {
+            "Book": "The adventures of Pytest",
+            "Book ID: ": 1,
+            "author": "Pytest",
+            "author id": 1
+        }
+    ]
+}
+        self.assertEquals(books, response.data)
     
+
+
     def test_viewreviews(self):
         response = self.client.get(url_for('read_allreviews'))
-        self.assertIn(b"Run unit tests", response.data)
+        reviews = {
+    "all reviews": [
+        {
+            "Author": "Pytest",
+            "Book": "The adventures of Pytest",
+            "Rating": 5,
+            "Review": "Boring book but good for testing",
+            "Review ID: ": 1
+        }
+    ]
+}
+        self.assertEquals(reviews, response.data)
+
+
 
 class TestCreate(TestBase):
 
     def test_authorcreate(self):
         response = self.client.post(
             url_for('create_author'),
-            data={"description": "Testing create functionality"},
+            json={"name": "Pytest"},
             follow_redirects=True
         )
-        self.assertIn(b"Testing create functionality", response.data)
+        self.assertEquals(b"The author: Pytest, has been added to the database with id 1", response.data)
    
     def test_bookcreate(self):
         response = self.client.post(
             url_for('create_book'),
-            data={"description": "Testing create functionality"},
+            data={"name": "The adventures of Pytest"},
             follow_redirects=True
         )
-        self.assertIn(b"Testing create functionality", response.data)
+        self.assertEquals(b"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database under the id {new_book.id}", response.data)
    
     def test_reviewcreate(self):
         response = self.client.post(
             url_for('create_review'),
-            data={"description": "Testing create functionality"},
+            data={"rating": 5, "thoughts": "Boring book but good for testing"},
             follow_redirects=True
         )
-        self.assertIn(b"Testing create functionality", response.data)
+        self.assertIn(b"Thank you for adding your review and rating to the database, id: 1", response.data)
     
 class TestUpdate(TestBase):
 
     def test_updateauthor(self):
-        response = self.client.post(
+        response = self.client.put(
             url_for('update_author', id=1),
-            data={"description": "Testing update functionality"},
+            data={"name": "Pytest"},
             follow_redirects=True
         )
-        self.assertIn(b"Testing update functionality", response.data)
+        self.assertIn(b"Updated Author 1, to Pytest", response.data)
     
     def test_updatebook(self):
-        response = self.client.post(
+        response = self.client.put(
             url_for('update_book', id=1),
-            data={"description": "Testing update functionality"},
+            data={"name": "The adventures of Pytest"},
             follow_redirects=True
         )
-        self.assertIn(b"Testing update functionality", response.data)
+        self.assertIn(b"Updated Book 1, to The adventures of Pytest", response.data)
     
     def test_updatereview(self):
-        response = self.client.post(
+        response = self.client.put(
             url_for('update_review', id=1),
-            data={"description": "Testing update functionality"},
+            data={"rating": 5, "thoughts": "Boring book but good for testing"},
             follow_redirects=True
         )
-        self.assertIn(b"Testing update functionality", response.data)
+        self.assertIn(b"Updated review of The adventures of Pytest, changed rating to 5 and thoughts to Boring book but good for testing ", response.data)
     
         
 
@@ -156,18 +147,18 @@ class TestDelete(TestBase):
             url_for('delete_author', id=1),
             follow_redirects=True
         )
-        self.assertNotIn(b"Run unit tests", response.data)
+        self.assertNotIn("Deleted: Pytest}", response.data)
     
     def test_delete_book(self):
         response = self.client.get(
             url_for('delete_book', id=1),
             follow_redirects=True
         )
-        self.assertNotIn(b"Run unit tests", response.data)
+        self.assertNotIn(b"The adventures of Pytest} : has been deleted", response.data)
     
     def test_delete_review(self):
         response = self.client.get(
             url_for('delete_review', id=1),
             follow_redirects=True
         )
-        self.assertNotIn(b"Run unit tests", response.data)
+        self.assertNotIn(b"Deleted review: 1", response.data)
