@@ -83,7 +83,7 @@ def create_review(id):
     return render_template("create_review.html", title="New Review", form=form, id=id)
 
 
-@app.route('/update/review/<int:id>', methods=["GET", "PUT"])
+@app.route('/update/review/<int:id>', methods=["GET", "POST"])
 def update_review(id):
     form = NewReview()
     review = requests.get("http://library_backend:5000/selectreview/{id}").json()
