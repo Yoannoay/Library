@@ -107,19 +107,19 @@ def read_allreviews():
         )
     return jsonify(review_dict)
 
-# @app.route('selectreview/<int:id>', methods=['GET'])
-# def selectreview(id):
-#     review = Reviews.query.get(id)
-#     review_dict: {"all reviews": [
-#         {
-#             "Author": review.name,
-#             "Book": review.book.name,
-#             "Rating": review.rating,
-#             "Review": review.thoughts,
-#             "Review ID: ": 1
-#         }
+@app.route('/selectreview/<int:id>', methods=['GET'])
+def selectreviews(id):
+    review = Review.query.get(id)
+    review_dict = {
+                "Book": review.book.name,
+                "Author": review.book.author.name,
+                "Rating": review.rating,
+                "Review": review.thoughts,
+                "Review ID: ": review.id
 
-#     }
+            }
+    
+    return jsonify(review_dict)
 
 # UPDATE ROUTES FOR ALL CLASSES
 
