@@ -86,7 +86,7 @@ def create_review(id):
 @app.route('/update/review/<int:id>', methods=["GET", "PUT"])
 def update_review(id):
     form = NewReview()
-    review_id = id
+  
 
     if request.method == "PUT":
         response = requests.put(
@@ -94,7 +94,7 @@ def update_review(id):
             json={
                 "rating": form.rating.data,
                 "thoughts": form.thoughts.data,
-                "review_id": review_id
+                "review_id": id
                  } 
         )
         return redirect(url_for("allreviews"))
