@@ -1,7 +1,7 @@
 from flask import url_for
 from flask_testing import TestCase
-from application import app, db
-from application.models import Tasks
+from application import app
+import requests_mock
 
 class TestBase(TestCase):
 
@@ -17,7 +17,10 @@ class TestBase(TestCase):
     def setUp(self):
         # Will be called before every test
         db.create_all()
-        db.session.add(Tasks(description="Run unit tests"))
+        db.session.add(Author(name="Pytest"))
+        db.session.add(Book(name="The adventures of Pytest"))
+        db.session.add(Review(rating=5, thoughts="Boring book but good for testing"))
+
         db.session.commit()
 
     def tearDown(self):
@@ -28,65 +31,101 @@ class TestBase(TestCase):
 class TestViews(TestBase):
     # Test whether we get a successful response from our routes
     def test_home_get(self):
+        with requests_mock.Mocker() as m:
+            all_authors= {
+    "author_list": [
+        {
+            "Author": "Pytest",
+            "Author ID: ": 1,
+            "Books": [
+                {
+                    "ID": 1,
+                    "name": "The adventures of Pytest"
+                }
+            ]
+        }
+    ]
+}
+        m.get(f"http://library_backend:5000/allauthors", json=all_authors)
         response = self.client.get(url_for('home'))
         self.assert200(response)
     
-    def test_create_task_get(self):
-        response = self.client.get(url_for('create_task'))
+    def test_create_book_get(self):
+        response = self.client.get(url_for('create_book', id=1))
         self.assert200(response)
 
-    def test_read_tasks_get(self):
-        response = self.client.get(url_for('read_tasks'))
+    def test_create_review_get(self):
+        response = self.client.get(url_for('create_review', id=1))
         self.assert200(response)
 
-    def test_update_task_get(self):
-        response = self.client.get(url_for('update_task', id=1))
+    def test_create_author_get(self):
+        response = self.client.get(url_for('create_author'))
         self.assert200(response)
+
+    def test_read_reviews_get(self):
+        with requests_mock.Mocker() as m:
+            all_reviews: {
+    "all reviews": [
+        {
+            "Author": "Pytest",
+            "Book": "The adventures of Pytest",
+            "Rating": 5,
+            "Review": "Boring book but good for testing",
+            "Review ID: ": 1
+        }
+    ]
+}
+        response = self.client.get(url_for(f"http://library_backend:5000/allreviews"))
+        self.assert200(response)
+
+    
 
 class TestRead(TestBase):
 
-    def test_read_home_tasks(self):
+    def test_read_home(self):
+        with requests_mock.Mocker() as m:
+            all_authors= {
+    "author_list": [
+        {
+            "Author": "Pytest",
+            "Author ID: ": 1,
+            "Books": [
+                {
+                    "ID": 1,
+                    "name": "The adventures of Pytest"
+                }
+            ]
+        }
+    ]
+}
+        m.get(f"http://library_backend:5000/allauthors", json=all_authors)
+
         response = self.client.get(url_for('home'))
-        self.assertIn(b"Run unit tests", response.data)
+        self.assertIn(b"Pytest", response.data)
     
-    def test_read_tasks_dictionary(self):
-        response = self.client.get(url_for('read_tasks'))
-        self.assertIn(b"Run unit tests", response.data)
 
 class TestCreate(TestBase):
 
-    def test_create_task(self):
+    def test_create_author(self):
+        with requests_mock.Mocker() as m:
+            all_authors = { "authors": [test_home,
+            {
+            "Author": "Pytest",
+            "Author ID: ": 1,
+            "Books": [
+                {
+                    "ID": 1,
+                    "name": "The adventures of Pytest"
+                }
+            ]
+        }]}
+            m.post(f"http://library_backend:5000/create/author", data="Test text")
+            m.get(f"http://library_backend:5000/allauthors", json=all_authors)
         response = self.client.post(
-            url_for('create_task'),
-            data={"description": "Testing create functionality"},
+            url_for('create_author'),
             follow_redirects=True
         )
-        self.assertIn(b"Testing create functionality", response.data)
+        self.assertIn(b, response.data)
     
-class TestUpdate(TestBase):
-
-    def test_update_task(self):
-        response = self.client.post(
-            url_for('update_task', id=1),
-            data={"description": "Testing update functionality"},
-            follow_redirects=True
-        )
-        self.assertIn(b"Testing update functionality", response.data)
-    
-    def test_complete_task(self):
-        response = self.client.get(url_for('complete_task', id=1), follow_redirects=True)
-        self.assertEqual(Tasks.query.get(1).completed, True)
-    
-    def test_incomplete_task(self):
-        response = self.client.get(url_for('incomplete_task', id=1), follow_redirects=True)
-        self.assertEqual(Tasks.query.get(1).completed, False)
         
 
-class TestDelete(TestBase):
-
-    def test_delete_task(self):
-        response = self.client.get(
-            url_for('delete_task', id=1),
-            follow_redirects=True
-        )
-        self.assertNotIn(b"Run unit tests", response.data)
