@@ -109,8 +109,6 @@ def update_review(id):
 @app.route('/update/book/<int:id>', methods=["GET", "POST"])
 def update_author(id):
     form = CreateAuthor()
-    
-    
 
     if request.method == "POST":
         response = requests.put(
