@@ -90,7 +90,7 @@ def update_review(id):
     
 
     if request.method == "POST":
-        response = requests.post(
+        response = requests.put(
             f"http://library_backend:5000/update/review/{id}",
             json={
                 "rating": form.rating.data,
