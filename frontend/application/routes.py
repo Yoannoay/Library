@@ -64,7 +64,7 @@ def create_book(id):
     return render_template("create_book.html", title="New Book", form=form, id=id)
 
 
-@app.route('/create/review/<int:id>', methods=["GET", "POST"])
+@app.route('/create/review/<int:id>', methods=["GET", "POST", "PUT"])
 def create_review(id):
     form = NewReview()
     book_id = id
