@@ -27,7 +27,7 @@ def create_book():
     return Response(f"The book: {new_book.name}, written by {new_book.author.name}, has been added to the database under the id {new_book.id}", mimetype='text/plain')
 
     
-@app.route('/create/review', methods=['POST'])
+@app.route('/create/review', methods=['POST', 'PUT'])
 
 def create_review():
     package = request.json
