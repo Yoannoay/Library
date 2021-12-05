@@ -20,7 +20,6 @@ def home():
 @app.route('/allreviews', methods= ['GET'])
 def allreviews():
     all_reviews = requests.get(f"http://library_backend:5000/allreviews").json()["all reviews"]
-    i = 0
     return render_template('allreviews.html', title="Home of Reviews", all_reviews=all_reviews)
 
 
@@ -83,6 +82,11 @@ def create_review(id):
     return render_template("create_review.html", title="New Review", form=form, id=id)
 
 
+
+# UPDATE ROUTES
+
+
+
 @app.route('/update/review/<int:id>', methods=["GET", "POST"])
 def update_review(id):
     form = NewReview()
@@ -101,6 +105,13 @@ def update_review(id):
 
     return render_template("create_review.html", title="New Review", form=form, id=id)
 
+# DELETE ROUTES
+
+
+@app.route('/delete/review/<int:id>')
+def delete_review(id):
+    reponse = requests.delete(f"http://library_backend:5000/delete/review/<int:id>")
+    return redirect(url_for('home'))
 
 
 
