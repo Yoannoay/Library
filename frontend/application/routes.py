@@ -83,39 +83,30 @@ def create_review(id):
     return render_template("create_review.html", title="New Review", form=form, id=id)
 
 
+@app.route('/update/review/<int:id>', methods=["GET", "PUT"])
+def update_review(id):
+    form = NewReview()
+    review_id = id
+
+    if request.method == "PUT":
+        response = requests.put(
+            f"http://library_backend:5000/create/review",
+            json={
+                "rating": form.rating.data,
+                "thoughts": form.thoughts.data,
+                "review_id": review_id
+                 } 
+        )
+        return redirect(url_for("allreviews"))
+
+    return render_template("create_review.html", title="New Review", form=form, id=id)
 
 
 
 
 
-# @app.route('/allbooks', methods=['GET'])
-# def books_list():
-#     form = TaskForm()
 
-#     if request.method == "POST":
-#         response = requests.post(
-#             f"http://{backend_host}/create/task",
-#             json={"description": form.description.data}
-#         )
-#         app.logger.info(f"Response: {response.text}")
-#         return redirect(url_for('home'))
-
-#     return render_template("create_task.html", title="Add a new Task", form=form)
-
-# @app.route('/read/allTasks')
-# def read_tasks():
-#     all_tasks = Tasks.query.all()
-#     tasks_dict = {"tasks": []}
-#     for task in all_tasks:
-#         tasks_dict["tasks"].append(
-#             {
-#                 "description": task.description,
-#                 "completed": task.completed
-#             }
-#         )
-#     return jsonify(tasks_dict)
-
-# @app.route('/update/task/<int:id>', methods=['GET','POST'])
+# @app.route('/update/author/<int:id>', methods=['GET','POST'])
 # def update_task(id):
 #     form = TaskForm()
 #     task = requests.get(f"http://{backend_host}/read/task/{id}").json()
