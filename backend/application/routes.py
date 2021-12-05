@@ -107,7 +107,19 @@ def read_allreviews():
         )
     return jsonify(review_dict)
 
+@app.route('selectreview/<int:id>', methods=['GET'])
+def selectreview(id):
+    review = Reviews.query.get(id)
+    review_dict: {"all reviews": [
+        {
+            "Author": review.name,
+            "Book": review.book.name,
+            "Rating": review.rating,
+            "Review": review.thoughts,
+            "Review ID: ": 1
+        }
 
+    }
 
 # UPDATE ROUTES FOR ALL CLASSES
 
@@ -133,7 +145,7 @@ def update_book(id):
     return Response(f"Updated Book {id}, to {book.name}", mimetype='test/plain')
 
 
-@app.route('/update/review/<int:id>', methods=['PUT'])
+@app.route('/update/review', methods=['PUT'])
 def update_review(id):
     package= request.json
     id= package["review_id"]
