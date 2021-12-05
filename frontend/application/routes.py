@@ -95,7 +95,7 @@ def update_review(id):
             json={
                 "rating": form.rating.data,
                 "thoughts": form.thoughts.data,
-                "book_id": all_reviews.book.id
+                "book_id": review.book.id
                  } 
         )
         return redirect(url_for("allreviews"))
