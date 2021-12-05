@@ -1,9 +1,6 @@
-At least 2 of the following in the README.md:
-CI/CD pipeline;
-a component-level diagram showing how the backend and frontend services interact with one another;
-a network infrastructure diagram.
+## My First Project.
 
-Jenkins deployment logs are evidenced in the README.md without further discussion.
+# Library with community reviews
 
 > **ERD:**
 
@@ -11,7 +8,9 @@ Jenkins deployment logs are evidenced in the README.md without further discussio
 
 Above is a ERD to demonstrate the table relationships. 
 
-I used two one to many relationships to link all data together from a common branch, in this case the author. 
+I used two one to many relationships to link all data together from a common branch, in this case the author.
+
+All tables have full CRUD functionality. 
 
 
 
