@@ -140,7 +140,3 @@ cython_debug/
 db_credentials
 
 /venv
-
-*venv
-venv*
-
