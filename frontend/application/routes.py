@@ -107,7 +107,7 @@ def update_review(id):
 
 
 @app.route('/update/book/<int:id>', methods=["GET", "POST"])
-def update_review(id):
+def update_author(id):
     form = CreateAuthor()
     
     
