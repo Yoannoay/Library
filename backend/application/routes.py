@@ -112,6 +112,7 @@ def selectreviews(id):
     review = Review.query.get(id)
     review_dict = {
                 "Book": review.book.name,
+                "Book ID: ": review.book.id,
                 "Author": review.book.author.name,
                 "Rating": review.rating,
                 "Review": review.thoughts,
