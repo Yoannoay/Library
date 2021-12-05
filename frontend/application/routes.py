@@ -86,7 +86,7 @@ def create_review(id):
 @app.route('/update/review/<int:id>', methods=["GET", "PUT"])
 def update_review(id):
     form = NewReview()
-    review = requests.get("http://library_backend:5000/selectreview/{id}")
+    review = requests.get("http://library_backend:5000/selectreview/{id}").json()
     all_reviews = requests.get(f"http://library_backend:5000/allreviews").json()["all reviews"]
 
     if request.method == "PUT":
