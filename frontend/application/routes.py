@@ -94,8 +94,7 @@ def update_review(id):
             f"http://library_backend:5000/update/review/{id}",
             json={
                 "rating": form.rating.data,
-                "thoughts": form.thoughts.data,
-                "book_id": review.book.id
+                "thoughts": form.thoughts.data
                  } 
         )
         return redirect(url_for("allreviews"))
