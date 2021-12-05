@@ -1,16 +1,19 @@
 {% extends "layout.html" %}
 {% block body %}
 
+<hr size="1" width="85%" color="black">
     
     {% for authors in all_authors %}
    
         <h1 style="text-align:center;">Author</h1>
 
             <p style="font-size:160%; text-align:center;"> {{ authors["Author"] }} </p>
+            
+            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('delete_author', id = authors["Author ID: "] ) }}"> Delete Author</a> </p>
     
             <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_book', id = authors["Author ID: "] ) }}"> New Book</a> </p>
            
-            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('delete_author', id = authors["Author ID: "] ) }}"> Delete Author</a> </p>
+           
         
     
 
@@ -24,9 +27,11 @@
 
             <p style="text-align:center;"> {{ book["name"] }} </p>
             
+            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('delete_book', id = book["ID"] ) }}"> Delete Book</a> </p>
+            
             <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('create_review', id = book["ID"]  ) }}"> New Review</a> </p>
             
-            <p style="font-size:105%; text-align:center;"> <a href="{{ url_for('delete_book', id = book["ID"] ) }}"> Delete Book</a> </p>
+            
         
     {% endfor %}
     

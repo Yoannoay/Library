@@ -105,6 +105,24 @@ def update_review(id):
 
     return render_template("create_review.html", title="New Review", form=form, id=id)
 
+
+@app.route('/update/book/<int:id>', methods=["GET", "POST"])
+def update_review(id):
+    form = CreateAuthor()
+    
+    
+
+    if request.method == "POST":
+        response = requests.put(
+            f"http://library_backend:5000/update/author/{id}",
+            json={
+                "name": form.name.data
+                } 
+        )
+        return redirect(url_for("home"))
+
+    return render_template("create_author.html", title="Amend Author name", form=form, id=id)
+
 # DELETE ROUTES
 
 
