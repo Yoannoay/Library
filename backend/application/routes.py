@@ -145,7 +145,7 @@ def update_book(id):
     return Response(f"Updated Book {id}, to {book.name}", mimetype='test/plain')
 
 
-@app.route('/update/review', methods=['PUT'])
+@app.route('/update/review/<int:id>', methods=['PUT'])
 def update_review(id):
     package= request.json
     id= package["review_id"]

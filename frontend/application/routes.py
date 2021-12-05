@@ -86,15 +86,16 @@ def create_review(id):
 @app.route('/update/review/<int:id>', methods=["GET", "PUT"])
 def update_review(id):
     form = NewReview()
-  
+    review = requests.get("http://library_backend:5000/selectreview/{id}")
+    all_reviews = requests.get(f"http://library_backend:5000/allreviews").json()["all reviews"]
 
-    if request.method == "PUT":
-        response = requests.put(
-            f"http://library_backend:5000/update/review",
+    if request.method == "POST":
+        response = requests.post(
+            f"http://library_backend:5000/update/review/{id}",
             json={
                 "rating": form.rating.data,
                 "thoughts": form.thoughts.data,
-                "review_id": id
+                "book_id": all_reviews.book.id
                  } 
         )
         return redirect(url_for("allreviews"))
