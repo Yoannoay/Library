@@ -110,20 +110,20 @@ def update_review(id):
 
 @app.route('/delete/author/<int:id>')
 def delete_author(id):
-    reponse = requests.delete(f"http://library_backend:5000/delete/author/{id}}")
+    reponse = requests.delete(f"http://library_backend:5000/delete/author/{id}")
     return redirect(url_for('home'))
 
 
 
 @app.route('/delete/book/<int:id>')
 def delete_book(id):
-    reponse = requests.delete(f"http://library_backend:5000/delete/book/{id}}")
+    reponse = requests.delete(f"http://library_backend:5000/delete/book/{id}")
     return redirect(url_for('home'))
 
 
 @app.route('/delete/review/<int:id>')
 def delete_review(id):
-    reponse = requests.delete(f"http://library_backend:5000/delete/review/{id}}")
+    reponse = requests.delete(f"http://library_backend:5000/delete/review/{id}")
     return redirect(url_for('home'))
 
 
